@@ -96,3 +96,34 @@ std::vector<Trade> OrderBook::addOrder(Order order) {
     return allTrades;
 }
 
+bool OrderBook::cancelOrder(OrderId orderId) {
+    // brute search
+    auto removeBySide = [&](auto& orderMap)->bool {
+        for (auto mapIt = orderMap.begin(); mapIt != orderMap.end(); ++mapIt) {
+            auto& currentOrderVector = mapIt->second;
+
+            // find ID in vec
+            for (auto vecIt = currentOrderVector.begin(); vecIt != currentOrderVector.end(); ++vecIt) {
+                if (vecIt->id == orderId) {
+                    currentOrderVector.erase(vecIt);
+
+                    // if this price level is empty
+                    if (currentOrderVector.empty()) {
+                        orderMap.erase(mapIt);
+                    }
+                    return true;
+                }
+            }
+        }
+        return false;
+    };
+
+    if (removeBySide(buyOrdersMap))
+        return true;
+
+    if (removeBySide(sellOrdersMap))
+        return true;
+
+    return false;
+}
+

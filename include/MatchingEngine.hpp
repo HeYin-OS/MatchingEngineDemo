@@ -12,4 +12,6 @@ private:
 
 public:
     std::vector<Trade> processOrder(const Order& order);
+
+    void cancelOrder(OrderId orderId, const std::string& symbol);
 };
