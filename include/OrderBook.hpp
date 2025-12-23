@@ -15,4 +15,6 @@ public:
     std::vector<Trade> addOrder(Order order);
 
     bool cancelOrder(OrderId orderId);
+
+    void printBook(const std::string& symbol) const;
 };

@@ -18,6 +18,9 @@ int main() {
     std::cout << "      MATCHING ENGINE DEMO        " << std::endl;
     std::cout << "==================================" << std::endl;
 
+    // snapshot on startup
+    engine.printGlobalSnapshot();
+
     // ==========================================
     // Scene 1: Basic Matching (AAPL)
     // ==========================================
@@ -42,6 +45,8 @@ int main() {
         .side = OrderSide::Buy,
         .type = OrderType::Limit
     }));
+
+    engine.printGlobalSnapshot();
 
     // ==========================================
     // Scene 2: No Match (Price Gap)
@@ -68,6 +73,7 @@ int main() {
         .type = OrderType::Limit
     }));
 
+    engine.printGlobalSnapshot();
 
     // ==========================================
     // Scene 3: Sweep (TSLA)
@@ -111,6 +117,7 @@ int main() {
     });
     printTrades(tradesSweep);
 
+    engine.printGlobalSnapshot();
 
     // ==========================================
     // Scene 4: Symbol Isolation (MSFT vs AAPL)
@@ -137,6 +144,8 @@ int main() {
         .type = OrderType::Limit
     });
     printTrades(tradesIsolation);
+
+    engine.printGlobalSnapshot();
 
     // ==========================================
     // Scene 5: Cancel Order
@@ -165,6 +174,11 @@ int main() {
         .side = OrderSide::Buy,
         .type = OrderType::Limit
     }));
+
+    engine.printGlobalSnapshot();
+
+    // pause
+    std::cin.get();
 
     return 0;
 }

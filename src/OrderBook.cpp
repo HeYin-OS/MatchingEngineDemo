@@ -127,3 +127,48 @@ bool OrderBook::cancelOrder(OrderId orderId) {
     return false;
 }
 
+void OrderBook::printBook(const std::string& symbol) const {
+    std::cout << "\n+------------------------------------------------+" << std::endl;
+    std::cout << "| ORDER BOOK: " << std::setw(35) << std::left << symbol << "|" << std::endl;
+    std::cout << "+-------+-----------+----------------+-----------+" << std::endl;
+    std::cout << "| TYPE  |   PRICE   |    QUANTITY    |   COUNT   |" << std::endl;
+    std::cout << "+-------+-----------+----------------+-----------+" << std::endl;
+
+    if (sellOrdersMap.empty()) {
+    } else {
+        for (auto it = sellOrdersMap.rbegin(); it != sellOrdersMap.rend(); ++it) {
+            Price price = it->first;
+            const auto& orders = it->second;
+
+            Quantity totalQty = 0;
+            for (const auto& o : orders) totalQty += o.quantity;
+
+            std::cout << "| " << "\033[31mASK\033[0m"
+                      << "   | " << std::setw(9) << price
+                      << " | " << std::setw(14) << totalQty
+                      << " | " << std::setw(9) << orders.size() << " |" << std::endl;
+        }
+    }
+
+    std::cout << "+-------+-----------+----------------+-----------+" << std::endl;
+    std::cout << "|              SPREAD (MARKET MID)               |" << std::endl;
+    std::cout << "+-------+-----------+----------------+-----------+" << std::endl;
+
+    if (buyOrdersMap.empty()) {
+    } else {
+        for (auto it = buyOrdersMap.begin(); it != buyOrdersMap.end(); ++it) {
+            Price price = it->first;
+            const auto& orders = it->second;
+
+            Quantity totalQty = 0;
+            for (const auto& o : orders) totalQty += o.quantity;
+
+            std::cout << "| " << "\033[32mBID\033[0m"
+                      << "   | " << std::setw(9) << price
+                      << " | " << std::setw(14) << totalQty
+                      << " | " << std::setw(9) << orders.size() << " |" << std::endl;
+        }
+    }
+    std::cout << "+-------+-----------+----------------+-----------+\n" << std::endl;
+}
+
