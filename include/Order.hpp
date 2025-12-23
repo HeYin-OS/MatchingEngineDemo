@@ -1,7 +1,8 @@
 #pragma once
 #include <cstdint>
 #include <chrono>
-#include <utility>
+#include <cstring>
+#include <string>
 
 enum class OrderSide : uint8_t {
     Buy = 0,
@@ -17,7 +18,7 @@ using OrderId = uint64_t;
 using Price = int64_t;
 using Quantity = uint32_t;
 
-
+// An ID generator that takes auto-increment strategy
 inline OrderId nextId() {
     static OrderId counter = 0;
     return ++counter;
@@ -25,17 +26,12 @@ inline OrderId nextId() {
 
 struct Order {
     OrderId id; // ID of the order
-    std::string symbol; // Goods type or symbol
+    char symbol[8]{}; // Goods type or symbol
     Price price; // Buy or sell price
     Quantity quantity; // Buy or sell quantity
     OrderSide side; // Buy side or sell side
     OrderType type; // Limit or market
-    uint64_t timestamp; // Timestamp for order creating
-
-    Order(OrderId _id, std::string _Symbol, Price _p, Quantity _q, OrderSide _s, OrderType _t)
-        : id(_id), symbol(std::move(_Symbol)), price(_p), quantity(_q), side(_s), type(_t) {
-        timestamp = std::chrono::high_resolution_clock::now().time_since_epoch().count();
-    }
+    uint64_t timestamp = static_cast<uint64_t>(std::chrono::high_resolution_clock::now().time_since_epoch().count()); // Timestamp for order creating
 };
 
 struct Trade {
