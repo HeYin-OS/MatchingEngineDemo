@@ -31,6 +31,7 @@ void MatchingEngine::printGlobalSnapshot() const {
 
     if (orderBooks.empty()) {
         std::cout << "  (No OrderBooks Active)" << std::endl;
+        std::cout << "==================================================\n" << std::endl;
         return;
     }
 
