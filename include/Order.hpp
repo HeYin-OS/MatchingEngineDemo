@@ -4,11 +4,13 @@
 #include <cstring>
 #include <string>
 
+// two types of order: buy and sell
 enum class OrderSide : uint8_t {
     Buy = 0,
     Sell = 1
 };
 
+// types of order: limit and market
 enum class OrderType : uint8_t {
     Limit,
     Market
@@ -37,6 +39,6 @@ struct Order {
 struct Trade {
     Price price; // Price on trade
     Quantity quantity; // Quantity on trade
-    OrderId makerId;
-    OrderId takerId;
+    OrderId makerId; // Originally from which order
+    OrderId takerId; // Eventually towards which order
 };
