@@ -74,6 +74,7 @@ int main() {
     // ==========================================
     std::cout << "\n[Test 3] Sweep the Book (TSLA)" << std::endl;
 
+    std::cout << "Setup: TSLA Sell Orders placed: 10@100, 20@101, 50@102" << std::endl;
     engine.processOrder({
         .id = nextId(),
         .symbol = "TSLA",

@@ -52,32 +52,32 @@ powershell
 ## Sample Output
 ```
 ==================================
-      MATCHING ENGINE DEMO        
+      MATCHING ENGINE DEMO
 ==================================
 
 [Test 1] Basic Matching (AAPL)
-Order 1: Sell 100 AAPL @ 150 (Maker)
+Order: Sell 100 AAPL @ 150 (Maker)
   -> No trades executed (Order added to book).
-Order 2: Buy 10 AAPL @ 150 (Taker)
+Order: Buy 10 AAPL @ 150 (Taker)
   -> [TRADE] 10 @ 150 (Maker: 1, Taker: 2)
 
-[Test 2] No Match (Price Gap)
-Order 3: Sell 50 AAPL @ 160
+[Test 2] No Match (AAPL)
+Order: Sell 50 AAPL @ 160
   -> No trades executed (Order added to book).
-Order 4: Buy 50 AAPL @ 140
+Order: Buy 50 AAPL @ 140
   -> No trades executed (Order added to book).
 
-[Test 3] Sweep the Book (Market Taker)
+[Test 3] Sweep the Book (TSLA)
 Setup: TSLA Sell Orders placed: 10@100, 20@101, 50@102
-Order 13: BIG BUY 40 TSLA @ 105
-  -> [TRADE] 10 @ 100 (Maker: 10, Taker: 13)
-  -> [TRADE] 20 @ 101 (Maker: 11, Taker: 13)
-  -> [TRADE] 10 @ 102 (Maker: 12, Taker: 13)
+Order: BIG BUY 40 TSLA @ 105
+  -> [TRADE] 10 @ 100 (Maker: 5, Taker: 8)
+  -> [TRADE] 20 @ 101 (Maker: 6, Taker: 8)
+  -> [TRADE] 10 @ 102 (Maker: 7, Taker: 8)
 
 [Test 4] Symbol Isolation
 Order 20: Sell MSFT @ 200
 Order 21: Buy AAPL @ 200 (Should NOT match MSFT)
-  -> [TRADE] 10 @ 150 (Maker: 1, Taker: 21)
+  -> [TRADE] 10 @ 150 (Maker: 1, Taker: 10)
 
 ```
 
