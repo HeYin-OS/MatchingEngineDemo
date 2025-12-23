@@ -17,6 +17,12 @@ using OrderId = uint64_t;
 using Price = int64_t;
 using Quantity = uint32_t;
 
+
+inline OrderId nextId() {
+    static OrderId counter = 0;
+    return ++counter;
+}
+
 struct Order {
     OrderId id; // ID of the order
     std::string symbol; // Goods type or symbol
